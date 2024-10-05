@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{DBCB2B42-243C-405B-896F-40BBA21086FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaSorter.UI.CLI", "src\UI\MediaSorter.UI.CLI\MediaSorter.UI.CLI.csproj", "{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E} = {DBCB2B42-243C-405B-896F-40BBA21086FC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16DF0B9F-8CA3-46CE-ABE4-DDC916CF1FDC}
+	EndGlobalSection
+EndGlobal
