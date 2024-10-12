@@ -13,7 +13,7 @@ public class Folder
     public required string Name { get; init; }
     public required Folder Parent { get; init; }
 
-    public ImmutableArray<Record> Records { get; private set; }
+    public ImmutableArray<Item> Items { get; private set; }
     public ImmutableArray<Folder> SubFolders { get; private set; }
 
     public Folder(string name, Folder parent)
@@ -21,13 +21,13 @@ public class Folder
         Name = name;
         Parent = parent;
 
-        Records = [];
+        Items = [];
         SubFolders = [];
     }
 
-    public void AddRecords(IEnumerable<Record> records)
+    public void AddItems(IEnumerable<Item> items)
     {
-        Records = records.ToImmutableArray();
+        Items = items.ToImmutableArray();
     }
 
     public void AddSubFolders(IEnumerable<Folder> subFolders)

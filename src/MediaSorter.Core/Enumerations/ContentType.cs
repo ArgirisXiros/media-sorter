@@ -20,17 +20,3 @@ public enum ContentType : short
 
     mp4 = 40
 }
-
-public static class ContentTypeExtensions
-{
-    private static readonly HashSet<ContentType> ImageContentTypes = [ ContentType.jpg,
-                                                                       ContentType.jpeg,
-                                                                       ContentType.png,
-                                                                       ContentType.gif ];
-
-    private static readonly HashSet<ContentType> VideoContentTypes = [ ContentType.mp4 ];
-
-    public static bool IsImage(this ContentType type) => ImageContentTypes.Contains(type);
-
-    public static bool IsVideo(this ContentType type) => VideoContentTypes.Contains(type);
-}
