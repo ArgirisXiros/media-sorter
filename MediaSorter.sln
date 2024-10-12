@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{DBCB2B42-243C-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaSorter.UI.CLI", "src\UI\MediaSorter.UI.CLI\MediaSorter.UI.CLI.csproj", "{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSorter.Core", "src\MediaSorter.Core\MediaSorter.Core.csproj", "{CC72C739-C940-4C4A-AD82-BDF9D40AA581}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC72C739-C940-4C4A-AD82-BDF9D40AA581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC72C739-C940-4C4A-AD82-BDF9D40AA581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC72C739-C940-4C4A-AD82-BDF9D40AA581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC72C739-C940-4C4A-AD82-BDF9D40AA581}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
