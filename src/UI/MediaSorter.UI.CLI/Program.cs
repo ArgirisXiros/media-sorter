@@ -1,4 +1,6 @@
-﻿using MetadataExtractor;
+﻿using MediaSorter.Core.Entities;
+using MediaSorter.Core.Extensions;
+using MetadataExtractor;
 using MetadataExtractor.Formats.Exif;
 using System.Globalization;
 using System.IO;
@@ -10,9 +12,10 @@ internal class Program
     static void Main(string[] args)
     {
         var verboseLogging = false;
-        var rootPath = "\\\\TRUENAS\\MediaStorageTemp\\family\\Photos\\2013";
+        var fromRootPath = "\\\\192.168.0.100\\MediaStorageTemp\\family\\Photos\\2014";
+        var toRootPath = "\\\\192.168.0.100\\family\\photos";
 
-        var folders = FindSubFoldersInFolders(rootPath);
+        var folders = FindSubFoldersInFolders(fromRootPath);
         foreach (var folder in folders)
         {
             if (!TryExtractDateFromPath(folder, out var dateInFolder))
@@ -23,6 +26,7 @@ internal class Program
 
             if (verboseLogging) Console.WriteLine($"{folder} - {dateInFolder}");
 
+            var folderParts = GetLastPartOfPath(folder);
             var files = FindContentsInFolder(folder);
             foreach (var file in files)
             {
@@ -38,6 +42,12 @@ internal class Program
                 if (isFileInCorrectFolder)
                 {
                     if (verboseLogging) Console.WriteLine($"{file} - OK");
+
+                    var directoryToCopy = $"{toRootPath}\\{dateInFolder.Year}\\{dateTakenInFile.ToString("yyyy-MM-dd")}{(string.IsNullOrEmpty(folderParts.Item2) ? string.Empty : $" - {folderParts.Item2}")}";
+                    System.IO.Directory.CreateDirectory(directoryToCopy);
+                    
+                    var fileName = GetFileName(file);
+                    // File.Copy(file, $"{directoryToCopy}\\{fileName}");
                 }
                 else
                 {
@@ -47,8 +57,42 @@ internal class Program
         }
     }
 
-    private static IEnumerable<string> FindContentsInFolder(string path) =>
-        System.IO.Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly);
+    private static IEnumerable<string> FindContentsInFolder(string path)
+    {
+        var separators = new char[] {
+            System.IO.Path.DirectorySeparatorChar,  
+            System.IO.Path.AltDirectorySeparatorChar  
+        };
+        
+        // foreach (var filePath in System.IO.Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly))
+        // {
+        //     if(System.IO.Directory.Exists(filePath)) {
+        //         var entries = filePath.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+        //         foreach (var entry in entries)
+        //         {
+        //             Console.Write($"{entry} ~ ");
+        //         }
+        //         Console.WriteLine($"Found file: {filePath}");
+        //     }
+        //     else if(File.Exists(filePath)) {
+        //         // var entries = Path.GetDirectoryName(filePath).Split(separators, StringSplitOptions.RemoveEmptyEntries);
+        //         var entries = filePath.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+        //         foreach (var entry in entries)
+        //         {
+        //             Console.Write($"{entry} ~ ");
+        //         }
+        //         Console.WriteLine($"Found file: {filePath}");
+        //     }
+        // }
+        
+        var items = System.IO.Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly)
+            .Select(System.IO.Path.GetFileName)
+            .Where(n => !string.IsNullOrEmpty(n))
+            .Select(fileName => new Item(fileName, fileName!.ToContentType()))
+            .ToArray();
+        
+        return System.IO.Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly);
+    }
 
     private static IEnumerable<string> FindSubFoldersInFolders(string path) =>
         System.IO.Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly);
@@ -57,7 +101,7 @@ internal class Program
     {
         var validDateFormats = new string[] { "yyyy-MM-dd" };
 
-        var dateString = path.Split('\\')[^1];
+        var dateString = GetLastPartOfPath(path).Item1;
         return DateTime.TryParseExact(dateString, validDateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
     }
 
@@ -128,5 +172,20 @@ internal class Program
         return dateInFolder.Year == dateTakenInFile.Year
             && dateInFolder.Month == dateTakenInFile.Month
             && dateInFolder.Day == dateTakenInFile.Day;
+    }
+
+    private static (string, string?) GetLastPartOfPath(string path)
+    {
+        var parts = path.Split('\\')[^1].Split(" - ");
+        if (parts.Length > 1)
+        {
+            return (parts[0], parts[1]);
+        }
+        return (parts[0], null);
+    }
+
+    private static string GetFileName(string file)
+    {
+        return file.Split('\\')[^1];
     }
 }

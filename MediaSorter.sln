@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaSorter.Core", "src\Med
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSorter.APP", "src\MediaSorter.APP\MediaSorter.APP.csproj", "{71772EC7-6A28-44AC-9FB0-49A36C7E29A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaSorter.Infrastructure.FileSystem", "src\Infrastructure\MediaSorter.Infrastructure.FileSystem\MediaSorter.Infrastructure.FileSystem.csproj", "{7BB8E0FA-35B8-4C56-B81E-43DB5E33A2E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{21437933-00C1-4F3F-B239-155AF33920C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +33,17 @@ Global
 		{71772EC7-6A28-44AC-9FB0-49A36C7E29A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71772EC7-6A28-44AC-9FB0-49A36C7E29A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71772EC7-6A28-44AC-9FB0-49A36C7E29A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BB8E0FA-35B8-4C56-B81E-43DB5E33A2E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BB8E0FA-35B8-4C56-B81E-43DB5E33A2E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BB8E0FA-35B8-4C56-B81E-43DB5E33A2E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BB8E0FA-35B8-4C56-B81E-43DB5E33A2E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ED518803-BA5D-4F3E-9B40-AA5AC47F9F7E} = {DBCB2B42-243C-405B-896F-40BBA21086FC}
+		{7BB8E0FA-35B8-4C56-B81E-43DB5E33A2E1} = {21437933-00C1-4F3F-B239-155AF33920C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16DF0B9F-8CA3-46CE-ABE4-DDC916CF1FDC}
