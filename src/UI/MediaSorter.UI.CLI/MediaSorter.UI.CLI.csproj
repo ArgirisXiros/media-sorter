@@ -8,10 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MetadataExtractor" Version="2.8.1" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\MediaSorter.Infrastructure.FileSystem\MediaSorter.Infrastructure.FileSystem.csproj" />
+    <ProjectReference Include="..\..\MediaSorter.APP\MediaSorter.APP.csproj" />
     <ProjectReference Include="..\..\MediaSorter.Core\MediaSorter.Core.csproj" />
   </ItemGroup>
 

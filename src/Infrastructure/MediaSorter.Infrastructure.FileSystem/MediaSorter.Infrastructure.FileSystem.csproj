@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\MediaSorter.Core\MediaSorter.Core.csproj" />
+    </ItemGroup>
+
 </Project>
