@@ -9,7 +9,7 @@ namespace MediaSorter.Core.Extensions;
 
 public static class StringExtensions
 {
-    public static ContentType ToContentType(this string value, ContentType defaultType = ContentType.undefined)
+    public static ContentType ToContentType(this string value, ContentType defaultType = ContentType.Undefined)
     {
         if (string.IsNullOrEmpty(value))
             return defaultType;

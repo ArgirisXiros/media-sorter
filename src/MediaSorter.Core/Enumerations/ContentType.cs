@@ -8,15 +8,15 @@ namespace MediaSorter.Core.Enumerations;
 
 public enum ContentType : short
 {
-    undefined = 0,
-    unknown = 1,
+    Undefined = 0,
+    Unknown = 1,
 
-    jpg = 10,
-    jpeg = 11,
+    Jpg = 10,
+    Jpeg = 11,
 
-    png = 20,
+    Png = 20,
 
-    gif = 30,
+    Gif = 30,
 
-    mp4 = 40
+    Mp4 = 40
 }

@@ -1,5 +1,6 @@
 using MediaSorter.Core.Abstractions;
 using MediaSorter.Core.Entities;
+using MediaSorter.Core.Entities.EntriesAggregate;
 
 namespace MediaSorter.Infrastructure.FileSystem.Services;
 

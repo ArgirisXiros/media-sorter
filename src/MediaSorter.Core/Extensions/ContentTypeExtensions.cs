@@ -9,12 +9,12 @@ namespace MediaSorter.Core.Extensions;
 
 public static class ContentTypeExtensions
 {
-    private static readonly HashSet<ContentType> ImageContentTypes = [ ContentType.jpg,
-                                                                       ContentType.jpeg,
-                                                                       ContentType.png,
-                                                                       ContentType.gif ];
+    private static readonly HashSet<ContentType> ImageContentTypes = [ ContentType.Jpg,
+                                                                       ContentType.Jpeg,
+                                                                       ContentType.Png,
+                                                                       ContentType.Gif ];
 
-    private static readonly HashSet<ContentType> VideoContentTypes = [ContentType.mp4];
+    private static readonly HashSet<ContentType> VideoContentTypes = [ContentType.Mp4];
 
     public static bool IsImage(this ContentType type) => ImageContentTypes.Contains(type);
 
