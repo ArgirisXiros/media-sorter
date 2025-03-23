@@ -10,9 +10,9 @@ internal class Program
     static void Main(string[] args)
     {
         var verboseLogging = false;
-        var fromRootPath = "\\\\192.168.0.100\\MediaStorageTemp\\family\\Photos\\2014";
-        var toRootPath = "\\\\192.168.0.100\\family\\photos";
-
+        var fromRootPath = "\\\\TRUENAS\\MediaStorageTemp\\family\\Photos";
+        var toRootPath = "\\\\TRUENAS\\family\\photos";
+        
         var rootFolder = _explorerService.Analyze(fromRootPath);
         
         // foreach (var folder in folders)

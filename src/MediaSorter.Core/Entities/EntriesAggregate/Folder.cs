@@ -4,33 +4,32 @@ namespace MediaSorter.Core.Entities.EntriesAggregate;
 
 public class Folder : Entry
 {
-    public string Representation { get; init; }
+    public string Representation { get; }
     
-    public Folder? Parent { get; private set; }
-    public ImmutableArray<Item> Items { get; private set; }
+    public Folder? Parent { get; }
     public ImmutableArray<Folder> SubFolders { get; private set; }
+    public ImmutableArray<Item> Items { get; private set; }
     
-    public Folder(string representation, string name) : base(name)
+    public Folder(string name, string representation, Folder? parent) : base(name)
     {
         ArgumentException.ThrowIfNullOrEmpty(representation);
         
         Representation = representation;
-
-        Items = [];
-        SubFolders = [];
+        
+        Parent = parent;
+        SubFolders = ImmutableArray<Folder>.Empty;
+        Items = ImmutableArray<Item>.Empty;
     }
 
-    public void UpdateItems(IEnumerable<Item> items)
+    public ImmutableArray<Folder> ResetSubFolders(IEnumerable<Folder> subFolders)
+    {
+        SubFolders = subFolders.ToImmutableArray();
+        return SubFolders;
+    }
+
+    public ImmutableArray<Item> ResetItems(IEnumerable<Item> items)
     {
         Items = items.ToImmutableArray();
-    }
-
-    public void UpdateSubFolders(Folder[] subFolders)
-    {
-        foreach (var subFolder in subFolders)
-        {
-            subFolder.Parent = this;
-        }
-        SubFolders = subFolders.ToImmutableArray();
+        return Items;
     }
 }

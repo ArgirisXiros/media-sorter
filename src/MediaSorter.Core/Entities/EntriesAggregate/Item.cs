@@ -1,13 +1,14 @@
 ﻿using MediaSorter.Core.Enumerations;
+using MediaSorter.Core.Extensions;
 
 namespace MediaSorter.Core.Entities.EntriesAggregate;
 
 public class Item : Entry
 {
-    public ContentType Type { get; init; }
+    public ContentType Type { get; }
 
-    public Item(string name, ContentType type) : base(name)
+    public Item(string name) : base(name)
     {
-        Type = type;
+        Type = name.ToContentType();
     }
 }

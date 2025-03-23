@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\MediaSorter.Core\MediaSorter.Core.csproj" />
-      <ProjectReference Include="..\MediaSorter.Infrastructure\MediaSorter.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

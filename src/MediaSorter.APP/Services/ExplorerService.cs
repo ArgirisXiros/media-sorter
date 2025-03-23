@@ -1,5 +1,4 @@
-using MediaSorter.APP.Abstractions;
-using MediaSorter.Core.Entities;
+using MediaSorter.Core.Abstractions;
 using MediaSorter.Core.Entities.EntriesAggregate;
 using MediaSorter.Infrastructure.FileSystem.Services;
 
@@ -7,27 +6,32 @@ namespace MediaSorter.APP.Services;
 
 public class ExplorerService : IExplorerService
 {
-    private static FoldersExplorerService _foldersExplorerService = new ();
-    private static ItemsExplorerService _itemsExplorerService = new ();
+    private static EntriesService _entriesService = new ();
     
-    public Folder Analyze(string rootPath)
+    public Folder? Analyze(string rootPath)
     {
-        var rootFolder = _foldersExplorerService.CreateFromRepresentation(rootPath);
-        return Analyze(rootFolder);
+        var result = Analyze(rootPath, null);
+        return result;
     }
 
-    public Folder Analyze(Folder rootFolder)
+    public Folder? Analyze(string path, Folder? parent)
     {
-        var items = _itemsExplorerService.GetAll(rootFolder);
-        rootFolder.UpdateItems(items);
-        
-        var subFolders = _foldersExplorerService.GetAllSubFolders(rootFolder);
-        foreach (var subFolder in subFolders)
+        var folderName = _entriesService.GetFolderRepresentationName(path);
+        if (folderName is null)
         {
-            Analyze(subFolder);
+            return null;
         }
-        rootFolder.UpdateSubFolders(subFolders);
-
-        return rootFolder;
+        
+        var result = new Folder(folderName, path, parent);
+        
+        var subFolders = _entriesService.GetAllFolderRepresentations(path)
+            .Select(subFolderPath => Analyze(subFolderPath, result))
+            .Where(subFolder => subFolder is not null).Select(subFolder => subFolder!);
+        result.ResetSubFolders(subFolders);
+        
+        var items = _entriesService.GetAllItems(path);
+        result.ResetItems(items);
+        
+        return result;
     }
 }
