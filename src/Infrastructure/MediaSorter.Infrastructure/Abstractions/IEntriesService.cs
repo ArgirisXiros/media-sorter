@@ -7,4 +7,5 @@ public interface IEntriesService
     bool IsValidFolderRepresentation(string path);
     string[] GetAllFolderRepresentations(string folderRepresentation);
     Item[] GetAllItems(string path);
+    DateTime? ExtractCreationDate(Folder folder, Item item);
 }

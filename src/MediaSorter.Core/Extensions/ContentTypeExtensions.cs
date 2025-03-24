@@ -25,6 +25,7 @@ public static class ContentTypeExtensions
         ContentType.Mkv,
         ContentType.Webm,
         ContentType.Flv,
+        ContentType.Mts
     }.ToFrozenSet();
 
     public static bool IsImage(this ContentType type) => ImageContentTypes.Contains(type);

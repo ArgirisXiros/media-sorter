@@ -1,19 +1,25 @@
 ﻿using MediaSorter.APP.Services;
+using MediaSorter.Infrastructure.FileSystem.Services;
 using System.Globalization;
 
 namespace MediaSorter.UI.CLI;
 
 internal class Program
 {
-    private static ExplorerService _explorerService = new ();
+    private static EntriesService _entriesService = new EntriesService();
+    private static ExplorerService _explorerService = new ExplorerService(_entriesService);
     
     static void Main(string[] args)
     {
-        var verboseLogging = false;
-        var fromRootPath = "\\\\TRUENAS\\MediaStorageTemp\\family\\Photos";
-        var toRootPath = "\\\\TRUENAS\\family\\photos";
+        // var fromRootPath = "\\\\TRUENAS\\MediaStorageTemp\\family\\Photos\\2014\\";
+        var fromRootPath = "\\\\TRUENAS\\family\\photos_old\\2016\\2016-05-14 - Εκδρομή στη Πύλο";
+        var rootFolder = _explorerService.Scan(true, fromRootPath);
+        if (rootFolder is null)
+        {
+            return;
+        }
         
-        var rootFolder = _explorerService.Analyze(fromRootPath);
+        
         
         // foreach (var folder in folders)
         // {

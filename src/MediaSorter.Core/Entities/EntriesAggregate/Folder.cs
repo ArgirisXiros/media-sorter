@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using MediaSorter.Core.Extensions;
+using System.Collections.Immutable;
 
 namespace MediaSorter.Core.Entities.EntriesAggregate;
 
@@ -19,6 +20,11 @@ public class Folder : Entry
         Parent = parent;
         SubFolders = ImmutableArray<Folder>.Empty;
         Items = ImmutableArray<Item>.Empty;
+
+        foreach (var metadataPair in Name.ToMetadata())
+        {
+            Metadata.Add(metadataPair.type, metadataPair.value);
+        }
     }
 
     public ImmutableArray<Folder> ResetSubFolders(IEnumerable<Folder> subFolders)

@@ -1,5 +1,12 @@
 using MediaSorter.Core.Entities.EntriesAggregate;
+using MediaSorter.Core.Enumerations;
+using MediaSorter.Core.Extensions;
 using MediaSorter.Infrastructure.Abstractions;
+using MetadataExtractor;
+using MetadataExtractor.Formats.Exif;
+using MetadataExtractor.Formats.QuickTime;
+using System.Globalization;
+using Directory = System.IO.Directory;
 
 namespace MediaSorter.Infrastructure.FileSystem.Services;
 
@@ -47,5 +54,36 @@ public class EntriesService : IEntriesService
             .ToArray();
 
         return items;
+    }
+
+    public DateTime? ExtractCreationDate(Folder folder, Item item)
+    {
+        var filePath = Path.Combine(folder.Representation, item.Name);
+        if (!File.Exists(filePath) || (!item.Type.IsImage() && !item.Type.IsVideo()))
+        {
+            return null;
+        }
+        
+        var directories = ImageMetadataReader.ReadMetadata(filePath);
+    
+        if (item.Type.IsImage())
+        {
+            var subIfdDirectory = directories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
+            var dateTime = subIfdDirectory?.GetDateTime(ExifDirectoryBase.TagDateTimeOriginal);
+
+            return dateTime;
+        }
+    
+        if (item.Type.IsVideo())
+        {
+            var quickTimeDirectory = directories.OfType<QuickTimeMovieHeaderDirectory>().FirstOrDefault();
+            if (quickTimeDirectory != null &&
+                quickTimeDirectory.TryGetDateTime(QuickTimeMovieHeaderDirectory.TagCreated, out var createdDate))
+            {
+                return createdDate;
+            }
+        }
+        
+        return null;
     }
 }

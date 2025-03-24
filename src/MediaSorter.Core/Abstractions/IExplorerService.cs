@@ -4,7 +4,5 @@ namespace MediaSorter.Core.Abstractions;
 
 public interface IExplorerService
 {
-    Folder? Analyze(string rootPath);
-
-    Folder? Analyze(string path, Folder? parent);
+    Folder? Scan(bool extractCreationDateTime, string path, Folder? parent = null);
 }

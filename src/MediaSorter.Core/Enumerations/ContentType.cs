@@ -20,5 +20,6 @@ public enum ContentType : short
     Wmv = 203,
     Mkv = 204,
     Webm = 205,
-    Flv = 206
+    Flv = 206,
+    Mts = 207,
 }
